@@ -34,50 +34,18 @@
 
 <script setup>
 import { ref } from 'vue';
+import data from '@/data.json';  
 
-const boards = ref(JSON.parse(localStorage.getItem('boards')) || [
-  {
-    id: 1,
-    title: 'Стадия 1',
-    cards: [
-      { id: 1, title: 'Карточка 1', score: 'Балл 3.2' },
-      { id: 2, title: 'Карточка 2', score: 'Балл  2', name: 'Проект 1' },
-      { id: 3, title: 'Карточка 3', score: 'Балл 5', name: 'Проект 2' },
-      { id: 4, title: 'Карточка 4', score: 'Балл 3', name: 'Проект 1' }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Стадия 2',
-    cards: [
-      { id: 5, title: 'Карточка 5', score: 'Балл 5', name: 'Проект 1' }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Стадия 3',
-    cards: [
-      { id: 6, title: 'Карточка 6', score: 'Балл 2', name: 'Проект 2' },
-      { id: 7, title: 'Карточка 7', score: 'Балл  4', name: 'Проект 1' },
-      { id: 8, title: 'Карточка 8', score: 'Балл 1' },
-    ],
-  },
-  {
-    id: 4,
-    title: 'Стадия 4',
-    cards: [],
-  }
-]);
+const boards = ref(data.boards);  
+
 
 const selectedProject = ref('');
 
 const filterCards = () => {
   boards.value.forEach(board => {
-    if (selectedProject.value === '') {
-      // Если проект не выбран, отображаем все карточки
+    if (selectedProject.value === '') { 
       board.cards = board.cards;
-    } else {
-      // Фильтруем карточки по выбранному проекту
+    } else { 
       board.cards = board.cards.filter(card => card.name === selectedProject.value);
     }
   });
